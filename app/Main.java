@@ -1,7 +1,5 @@
 package app;
 
-import java.util.Scanner;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
@@ -42,6 +40,46 @@ public class Main {
         System.out.println("Добуток елементів у парних стовпцях (стовпець 0, 2): " + prodEven);
         System.out.println("Добуток елементів у непарних стовпцях (стовпець 1, 3): " + prodNonEven);
     }
+    public static void magicSquare(int[][] array) {
+        int MagicSum = 0;
+        for (int i = 0; i < array.length; i++) {
+            MagicSum += array[0][i];
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            int n = 0;
+            for (int j = 0; j < array[i].length; j++) {
+                n+= array[i][j];
+            }
+            if (n != MagicSum) {
+                System.out.println("Матриця НЕ є магічним квадратом");
+                return;
+            }
+        }
+        for (int j = 0; j < array.length; j ++) {
+            int m = 0;
+            for (int i = 0; i < array.length; i ++) {
+                m += array[i][j];
+            }
+            if (m != MagicSum) {
+                System.out.println("Матриця НЕ є магічним квадратом");
+                return;
+            }
+        }
+        int d = 0;
+        for (int i = 0; i < array.length; i++) {
+            d += array[i][i];
+        }
+        int p = 0;
+        for (int i = 0; i < array.length; i ++) {
+            p += array[i][array.length - 1 - i];
+        }
+        if (d != MagicSum || p != MagicSum) {
+            System.out.println("Матриця НЕ є магічним квадратом");
+            return;
+        }
+        System.out.println("Матриця Є магічним квадратом");
+    }
     public static void main(String args[]) {
         int[][] array = new int[4][4];
         Random random = new Random();
@@ -61,5 +99,6 @@ public class Main {
         sumEven(array);
         sumNoneven(array);
         prod(array);
+        magicSquare(array);
     }
 }
